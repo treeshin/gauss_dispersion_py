@@ -1,0 +1,103 @@
+def calc_d(distance, stability, he):
+    
+    from math import exp, log
+
+    if he <= 15:
+        if distance <= 999:
+            D = exp(-9.07794+0.4357604*log(distance)-0.07881594*log(distance)*log(distance))
+        elif distance > 999 and distance <= 9999:
+            D = exp(-6.64143-0.2466506*log(distance)-0.03098147*log(distance)*log(distance))
+        else:
+            D = exp(-14.06597+1.10343*log(distance)-0.09031373*log(distance)*log(distance))
+
+    elif he > 15 and he <= 45:
+        if stability == 0 or stability == 1 or stability == 2:
+            if distance <= 399:
+                D = exp(-35.30917 + 9.57035*log(distance) - 0.8727484*log(distance)*log(distance))
+            elif distance > 399 and distance <= 1999:
+                D = exp(-3.946649 - 0.882866*log(distance))
+            elif distance > 1999 and distance <= 4999:
+                D = exp(-3.256392 - 1.20884*log(distance) + 0.03092014*log(distance)*log(distance))
+            elif distance > 4999 and distance <= 12999:
+                D = exp(-5.975507 - 0.6270642*log(distance))
+            elif distance > 12999 and distance <= 19999:
+                D = exp(12.1268 - 4.455138*log(distance) + 0.202586*log(distance)*log(distance))
+            elif distance > 19999 and distance <= 59999:
+                D = exp(-10.79479 + 0.01276474*log(distance) - 0.01497699*log(distance)*log(distance))
+            else:
+                D = exp(-54.18442 + 7.877314*log(distance) - 0.3715153*log(distance)*log(distance))
+        elif stability == 3:
+            if distance <= 199:
+                D = exp(-42.9116 + 8.624134*log(distance) - 0.5286823*log(distance)*log(distance))
+            elif distance > 199 and distance <= 399:
+                D = exp(-45.080005 + 9.502915*log(distance) - 0.6178266*log(distance)*log(distance))
+            elif distance > 399 and distance <= 1499:
+                D = exp(-46.40474 + 10.93155*log(distance) - 0.818256*log(distance)*log(distance))
+            elif distance > 1499 and distance <= 6999:
+                D = exp(-12.06068 + 1.105205*log(distance) - 0.1167178*log(distance)*log(distance))
+            elif distance > 6999 and distance <= 14999:
+                D = exp(-4.148934 - 0.821923*log(distance))
+            else:
+                D = exp(-4.640997 - 0.7696691*log(distance))
+        else: 
+            if distance <= 4999:
+                D = exp(-156.334 + 29.93037*log(distance) - 1.5483*log(distance)*log(distance))
+            elif distance > 4999 and distance <= 8399:
+                D = exp(-140.62 + 26.18382*log(distance) - 1.324944*log(distance)*log(distance))
+            elif distance > 8399 and distance <= 41999:
+                D = exp(-87.89882 + 15.38889*log(distance) - 0.7753119*log(distance)*log(distance))
+            else:
+                D = exp(-12.94973 + 1.26526*log(distance) - 0.1098207*log(distance)*log(distance))
+
+    elif he > 45 and he <= 80:
+        if stability == 0 or stability == 1 or stability == 2:
+            if distance <= 399:
+                D = exp(-30.4523 + 5.76941*log(distance) - 0.394098*log(distance)*log(distance))
+            elif distance > 399 and distance <= 899:
+                D = exp(-36.23268 + 8.23023*log(distance) - 0.6448782*log(distance)*log(distance))
+            elif distance > 899 and distance <= 2999:
+                D = exp(-1.56127 - 1.725164*log(distance) + 0.0694564*log(distance)*log(distance))
+            elif distance > 2999  and distance <= 12999:
+                D = exp(-5.807573 - 0.6388715*log(distance))
+            elif distance > 12999 and distance <= 49999:
+                D = exp(-0.2792892 - 1.959056*log(distance) + 0.07773757*log(distance)*log(distance))
+            else:
+                D = exp(-58.14337 + 8.633218*log(distance) - 0.4071184*log(distance)*log(distance))
+        elif stability == 3:
+            if distance <= 299:
+                D = exp(-177.431 + 55.32239*log(distance) - 4.658777*log(distance)*log(distance))
+            elif distance > 299 and distance  <= 999:
+                D = exp(-58.73299 + 12.91683*log(distance) - 0.8705195*log(distance)*log(distance))
+            elif distance > 999 and distance <= 2999:
+                D = exp(-45.04643 + 9.088059*log(distance) - 0.6027659*log(distance)*log(distance))
+            elif distance > 2999 and distance <= 19999:
+                D = exp(-13.59167 + 1.164582*log(distance) - 0.1036683*log(distance)*log(distance))
+            else:
+                D = exp(-4.867893 - 0.7430947*log(distance))
+        else:
+            if distance <= 79999:
+                D = exp(-357.2949 + 59.55312*log(distance) - 2.583151*log(distance)*log(distance))
+            else:
+                D = exp(-134.0653 + 20.00078*log(distance) - 0.8306277*log(distance)*log(distance))
+
+    else:
+        if stability == 0 or stability == 1 or stability == 2:
+            if distance <= 399:
+                D = exp(-57.04822 + 13.82261*log(distance) - 1.019382*log(distance)*log(distance))
+            elif distance > 399 and distance <= 2999:
+                D = exp(-35.26215 + 7.297182*log(distance) - 0.5343292*log(distance)*log(distance))
+            elif distance > 2999 and distance <= 29999:
+                D = exp(-1.488902 - 1.694416*log(distance) + 0.06353313*log(distance)*log(distance))
+            else:
+                D = exp(-45.70724 + 6.464447*log(distance) - 0.3122405*log(distance)*log(distance))
+        elif stability == 3:
+            if distance <= 1499:
+                D = exp(-63.81157 + 11.90979*log(distance) - 0.6561428*log(distance)*log(distance))
+            elif distance > 1499 and distance <= 9999:
+                D = exp(-44.54416 + 8.03507*log(distance) - 0.4868832*log(distance)*log(distance))
+            else:
+                D = exp(-9.971805 + 0.1761891*log(distance) -0.04063289*log(distance)*log(distance))
+        else:
+            D = 0
+    
+    return(D)
