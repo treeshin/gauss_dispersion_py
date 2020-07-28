@@ -3,18 +3,17 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from matplotlib import cm
 
+# load 'ARTM_results_16dir.csv' or 'ARTM_results_dryz_16dir.csv'
 df = pd.read_csv('ARTM_results_dryz_16dir.csv',
                     sep = ",",
                     header = None,
                     engine = 'python')
 
 df = np.array(df)
-
 index = df[0,:]
 index=index.astype(int)
 
-#orography = np.zeros((16,len(index)))
-orography = df[1:17,:]
+orography = df[1:17,:] # don't mind the variable name
 
 orography_new = np.zeros((16,len(index)))
 for i in range(16):
@@ -52,7 +51,7 @@ for k in range(len(zeniths)):
 
 fig, ax = plt.subplots(subplot_kw=dict(projection='polar'))
 
-# Set clockwise polar coordinate
+# set clockwise polar coordinate
 ax.set_theta_zero_location("N")
 ax.set_theta_direction(-1)
 
