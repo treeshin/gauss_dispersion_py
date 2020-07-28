@@ -1,7 +1,4 @@
-#****************************************************************
-# XOQDOQ
-# calculates xoq and doq value for 16 wind direction
-#****************************************************************
+# calculates X/Q and D/Q in 16 directions
 import sys
 import numpy as np
 from math import exp, pi, sqrt, log10, sin, cos
@@ -11,24 +8,17 @@ from data import hs, w0, diameter, sl, pl, hb, winspeed, frequency, sumsum
 from function import calc_sigma, calc_d, calc_he, u_cor, calc_Et, opentr
 from ARTM_orography import orography, index
 
-# Load xoqdoq result file (in output folder) for comparison
-# from pxoq import *
-# distance, pxoq = pxoq("output_G_elevated_only_NRC.txt") # pxoq : PNNL xoqdoq
 np.set_printoptions(threshold=np.inf)
 
-####################################################
+## set x range here ############################
 x = np.arange(1,5000,1) # x: distance in meters
-# x = distance # when comparing with pxoq
-####################################################
-
+################################################
 xoq_elevated = np.zeros((len(x),16))
 xoq_ground = np.zeros((len(x),16))
 doq = np.zeros((len(x),16))
-
 frequency = frequency
 sumsum = sumsum
 lenw = len(winspeed)
-
 orography = orography
 index = index
 
@@ -68,7 +58,7 @@ zeniths = x
 r, theta = np.meshgrid(zeniths, azimuths)
 values = np.zeros((azimuths.size, zeniths.size))
 
-###################################################################
+## set plot parameters here ###################################
 for k in range(len(zeniths)):
     for l in range(len(azimuths)-1):
         # Wind direction is opposite to dispersion direction
@@ -77,18 +67,16 @@ for k in range(len(zeniths)):
         elif l > 7:
             values[l-8,k] = doq[k,l] ## select xoq or doq
     values[16,k] = values[0,k]
-###################################################################
+###############################################################
 
 fig, ax = plt.subplots(subplot_kw=dict(projection='polar'))
 
-# Set clockwise polar coordinate
+# set clockwise polar coordinate
 ax.set_theta_zero_location("N")
 ax.set_theta_direction(-1)
 
-##################################################################
-## colorbar level setting
+## colorbar level setting ########################################
 lev = [c for c in np.arange(0,maxdoq*1.1,maxdoq/10, dtype=float)]
-# lev1 = [c*10**-7 for c in np.arange(0,1.1,0.1, dtype=float)]
 ##################################################################
 
 cs = ax.contourf(theta, r, values, levels = lev, cmap = 'viridis')
