@@ -170,18 +170,21 @@ def calc_he(stability, hs, w0, winspeed, diameter, distance, direction, index, o
                 hprC = 4 * (Fm/S) ** (1/4)
                 hprD = 1.5 * (Fm/winspeed) ** (0.333) * S ** (-0.1667)
                 hpr = min([hprA, hprB, hprC, hprD])
-
+                
     a=np.where(index >= distance)[0]
 
     if len(a)==0:
         i = len(index)-1
+        ht = orography[direction,i]
     else:
         i= min(a)
-    
-    ht = orography[direction,i]
+        ht = ((orography[direction,i]-orography[direction,i-1])/(index[i]-index[i-1]))*(distance-index[i-1])+orography[direction,i-1]
+
+    if ht < 0:
+        ht = 0
 
     he = hs + hpr - ht
-    
+
     return(he)
 
 
